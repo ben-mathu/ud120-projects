@@ -15,6 +15,15 @@ def outlierCleaner(predictions, ages, net_worths):
 
     ### your code goes here
 
+    print('Length of data before cleaning: ', len(predictions))
+    for i in range(len(predictions)):
+        error = abs(net_worths[i] - predictions[i])
+        # error = pow(error, 2)
+        cleaned_data.append((ages[i], net_worths[i], error))
+        
+    
+    cleaned_data = sorted(cleaned_data, key=lambda tup: tup[2])[:int(len(cleaned_data) * 0.9)]
+    print('Length of cleaned data: ', len(cleaned_data))
     
     return cleaned_data
 
